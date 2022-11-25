@@ -10,6 +10,7 @@ while [ -d ~/spyserver ]; do
 done
 
 mkdir spyserver && cd spyserver
+# there programm will have tryed to find app do with the architecture
 if [ `uname -m` == "armhf" ] || [ `uname -m` == "armv7l" ]; then
   link="https://www.airspy.com/?ddownload=4247"
 elif [ `uname -m` == "aarch" ]; then
@@ -24,6 +25,7 @@ fi
 
 wget -O spyserver.tgz $link
 tar xvzf spyserver.tgz && rm -rf spyserver.tgz
+# there programm wants to know some specific parameters 
 echo "Print the IP address for listening (default is 0.0.0.0), for example 192.168.1.0/24 or 8.8.8.8\n"
 read ip
 echo "Print the port (default is between 5555 and 6666)\n"
