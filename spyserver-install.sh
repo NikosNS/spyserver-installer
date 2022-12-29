@@ -1,5 +1,6 @@
 #!/bin/bash 
 
+# by NikosNS
 cd ~ 
 apt update && sudo apt upgrade -y && apt install -y airspy libairspy0 libairspy-dev rtl-sdr librtlsdr-dev 
 apt install -y wget htop tmux iftop 
