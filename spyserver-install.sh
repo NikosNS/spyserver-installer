@@ -2,7 +2,7 @@
 
 # by NikosNS
 cd ~ 
-apt update && sudo apt upgrade -y && apt install -y airspy libairspy0 libairspy-dev rtl-sdr librtlsdr-dev 
+apt update && apt upgrade -y && apt install -y airspy libairspy0 libairspy-dev rtl-sdr librtlsdr-dev 
 apt install -y wget htop tmux iftop 
  
 # check if  there is spyserver directory from previous installaltion 
