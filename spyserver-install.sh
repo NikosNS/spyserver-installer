@@ -16,7 +16,7 @@ mkdir spyserver && cd spyserver
 if [ `uname -m` == "armhf" ] || [ `uname -m` == "armv7l" ]
 then 
   link="https://www.airspy.com/?ddownload=4247" 
-elif [ `uname -m` == "aarch" ]
+elif [ `uname -m` == "aarch64" ]
 then 
   link="https://www.airspy.com/?ddownload=5795"
 elif [ `uname -m` == "x86_64" ]
