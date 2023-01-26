@@ -2,27 +2,32 @@
 
 # by NikosNS
 cd ~ 
-apt update && apt upgrade -y && apt install -y airspy libairspy0 libairspy-dev rtl-sdr librtlsdr-dev 
-apt install -y wget htop tmux iftop 
+apt update && apt upgrade -y && apt install -y airspy libairspy0 libairspy-dev rtl-sdr librtlsdr-dev
+apt install -y wget htop tmux iftop
  
 # check if  there is spyserver directory from previous installaltion 
-while [ -d ~/spyserver ]; do 
-  rm -rf ~/spyserver 
-done 
+if [ -d ~/spyserver ]
+then
+  rm -rf ~/spyserver
+fi
 
 mkdir spyserver && cd spyserver 
 # there programm will have tryed to find app do with the architecture 
-if [ `uname -m` == "armhf" ] || [ `uname -m` == "armv7l" ]; then 
+if [ `uname -m` == "armhf" ] || [ `uname -m` == "armv7l" ]
+then 
   link="https://www.airspy.com/?ddownload=4247" 
-elif [ `uname -m` == "aarch" ]; then 
-  link="https://www.airspy.com/?ddownload=5795" 
-elif [ `uname -m` == "x86_64" ]; then 
+elif [ `uname -m` == "aarch" ]
+then 
+  link="https://www.airspy.com/?ddownload=5795"
+elif [ `uname -m` == "x86_64" ]
+then
   link="https://www.airspy.com/?ddownload=4262" 
-elif [ `uname -m` == "x86" ]; then 
-  link="https://www.airspy.com/?ddownload=4308" 
-else 
-  echo "There is an unknown architecture" 
-fi 
+elif [ `uname -m` == "x86" ]
+then
+  link="https://www.airspy.com/?ddownload=4308"
+else
+  echo "There is an unknown architecture"
+fi
   
 wget -O spyserver.tgz $link 
 tar xvzf spyserver.tgz && rm -rf spyserver.tgz 
