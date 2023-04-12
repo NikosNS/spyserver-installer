@@ -74,9 +74,10 @@ alias sstart='sudo systemctl start spyserver.service'
 alias sstop='sudo systemctl stop spyserver.service'
 EOF
 wget https://raw.githubusercontent.com/keenerd/rtl-sdr/master/rtl-sdr.rules && mv rtl-sdr.rules /etc/udev/rules.d/
-read -p "Print 2 IP to bind service activity by ping them \n Example 8.8.8.8 1.1.1.1:  " ip1 ip2
+read -p "Print 2 IP to bind service activity by ping them Example 8.8.8.8 1.1.1.1:  " ip1 ip2
 cat <<EOF >> /etc/crontab
-*/3 * * * * root /bin/bash -c "ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null; if [ `$?` -ne 0 ]; then systemctl stop spyserver.service && echo 'PING NOT OK' `date` >> /var/log/pingerr.log; else if [ `systemctl is-active spyserver.service` == 'inactive' ]; then systemctl daemon-reload && systemctl start spyserver.service; fi; fi"
+*/3 * * * * root /bin/bash -c "ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null; if [ \$? -ne 0 ]; then systemctl stop spyserver.service && echo 'PING NOT OK' \`date`\ >> /var/log/pingerr.log; else if [ `systemctl is-active spyserver.service` == 'inactive' ]; then systemctl daemon-reload && systemctl start spyserver.service; fi; fi"
+0 0 1 * * root /bin/bash -c "rm /var/log/pingerr.log"
 EOF
 systemctl enable spyserver.service && systemctl daemon-reload && systemctl start spyserver.service
 
@@ -92,6 +93,6 @@ then
   timeout
   reboot now
 else
-  printf "Restart your system mannualy with \033[0;32msudo -i\033[0m \n"
+  printf "Restart your system mannualy with \033[0;32msudo reboot\033[0m \n"
   exit 0
 fi
