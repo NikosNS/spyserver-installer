@@ -1,2 +1,3 @@
 # spyserver-installer
-This is my attempt to create simple way for installation spyserver on different devices
+There is simple script that install spyserver on your raspberry x32 or x64
+It creates servise in systemd
