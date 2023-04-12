@@ -80,7 +80,7 @@ touch /home/pi/spyserver/pigtest.sh && chmod +x /home/pi/spyserver/pingtest.sh
 cat <<EOF >> /root/pingtest.sh
 #!/bin/bash
 
-ping -c 2 $ip1 >/dev/null || ping -c 2 $ip2 >/dev/null
+ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null
 v=$?
 s=`systemctl is-active spyserver.service`
 if [ $v -eq 0 ] && [ $s == 'inactive' ]
