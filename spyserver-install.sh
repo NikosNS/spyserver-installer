@@ -76,7 +76,7 @@ EOF
 wget https://raw.githubusercontent.com/keenerd/rtl-sdr/master/rtl-sdr.rules && mv rtl-sdr.rules /etc/udev/rules.d/
 read -p "Print 2 IP to bind service activity by ping them \n Example 8.8.8.8 1.1.1.1:  " ip1 ip2
 cat <<EOF >> /etc/crontab
-*/3 * * * * root /bin/bash/ -c "ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null; if [ $? != 0 ]; then systemctl stop spyserver.service && echo 'PING NOT OK' `date` >> /var/log/pingerr.log; else if [ systemctl is-active spyserver.service == 'inactive' ]; then systemctl daemon-reload && systemctl start spyserver.service; fi; fi"
+*/3 * * * * root /bin/bash -c "ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null; if [ `$?` -ne 0 ]; then systemctl stop spyserver.service && echo 'PING NOT OK' `date` >> /var/log/pingerr.log; else if [ `systemctl is-active spyserver.service` == 'inactive' ]; then systemctl daemon-reload && systemctl start spyserver.service; fi; fi"
 EOF
 systemctl enable spyserver.service && systemctl daemon-reload && systemctl start spyserver.service
 
