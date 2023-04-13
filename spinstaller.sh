@@ -80,12 +80,12 @@ cat <<EOF >> /home/pi/spyserver/pingtest.sh
 #!/bin/bash
 
 ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null
-v=$?
-s=`systemctl is-active spyserver.service`
-if [ $v -eq 0 ] && [ $s == 'inactive' ]
+v=\$?
+s=\`systemctl is-active spyserver.service\`
+if [ \$v -eq 0 ] && [ \$s == 'inactive' ]
 then
   systemctl start spyserver.service
-elif [ $v -ne 0 ]
+elif [ \$v -ne 0 ]
 then
   systemctl stop spyserver.service
 fi
