@@ -76,8 +76,7 @@ EOF
 wget https://raw.githubusercontent.com/keenerd/rtl-sdr/master/rtl-sdr.rules && mv rtl-sdr.rules /etc/udev/rules.d/
 printf "Print 2 IP to bind service activity by ping them \n"
 read -p "Example 8.8.8.8 1.1.1.1:  " ip1 ip2
-touch /home/pi/spyserver/pigtest.sh && chmod +x /home/pi/spyserver/pingtest.sh
-cat <<EOF >> /root/pingtest.sh
+cat <<EOF >> /home/pi/spyserver/pingtest.sh
 #!/bin/bash
 
 ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null
@@ -91,6 +90,7 @@ then
   systemctl stop spyserver.service
 fi
 EOF
+chmod +x /home/pi/spyserver/pingtest.sh
 echo "*/3 * * * * root /home/pi/spyserver/" >> /etc/crontab
 systemctl enable spyserver.service && systemctl daemon-reload && systemctl start spyserver.service
 
