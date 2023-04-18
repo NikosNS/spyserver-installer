@@ -17,7 +17,7 @@ timeout () {
 # cheeck if user is root
 if [ `whoami` != 'root' ]
 then
-  printf "\033[0;31mNeed root, try \033[0;32msudo -i\033[0m \033[0;31mbefore start\n\033[0m"
+  printf "\033[0;31mNeed root, try \033[0;32msudo su\033[0m \033[0;31mbefore start\n\033[0m"
   exit 0
 fi
 
