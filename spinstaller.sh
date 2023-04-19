@@ -92,7 +92,7 @@ then
 fi
 EOF
 chmod +x /home/pi/spyserver/pingtest.sh
-echo "*/3 * * * * root /home/pi/spyserver/" >> /etc/crontab
+echo "*/3 * * * * root /home/pi/spyserver/pingtest.sh" >> /etc/crontab
 systemctl enable spyserver.service && systemctl daemon-reload && systemctl start spyserver.service
 
 # additional info and condition for reboot the system
