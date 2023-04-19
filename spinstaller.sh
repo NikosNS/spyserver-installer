@@ -2,7 +2,7 @@
 
 # simple function to wait few seconds
 timeout () {
-  for (( i=1; i<=7; i++ ))
+  for (( i=1; i<=6; i++ ))
   do
     printf "\033[0;31m.\n\033[0m"
     for j in $(seq 1 $i)
@@ -17,7 +17,7 @@ timeout () {
 # cheeck if user is root
 if [ `whoami` != 'root' ]
 then
-  printf "\033[0;31mNeed root, try \033[0;32msudo -i\033[0m \033[0;31mbefore start\n\033[0m"
+  printf "\033[0;31mNeed root, try \033[0;32msudo su\033[0m \033[0;31mbefore start\n\033[0m"
   exit 0
 fi
 
@@ -42,8 +42,9 @@ fi
 tar xvzf spyserver.tgz && rm *.tgz
 
 # editing configfile, then moving files to /usr/bin and /etc
-printf "You can add some new parameters in configfile via Nano editor after few sec\n"
 timeout
+printf "You can add some new parameters in configfile via Nano editor after few sec\n"
+sleep 1
 nano spyserver.config
 cp spyserver /usr/bin && cp spyserver.config /etc
 chown -R pi:pi /home/pi/spyserver
@@ -79,7 +80,7 @@ read -p "Example 8.8.8.8 1.1.1.1:  " ip1 ip2
 cat <<EOF >> /home/pi/spyserver/pingtest.sh
 #!/bin/bash
 
-ping -c 3 $ip1 >/dev/null || ping -c 3 $ip2 >/dev/null
+ping -c 3 -s 8 $ip1 >/dev/null || ping -c 3 -s 8 $ip2 >/dev/null
 v=\$?
 s=\`systemctl is-active spyserver.service\`
 if [ \$v -eq 0 ] && [ \$s == 'inactive' ]
