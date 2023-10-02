@@ -98,7 +98,7 @@ systemctl enable spyserver.service && systemctl daemon-reload && systemctl start
 # additional info and condition for reboot the system
 printf "\n"
 timeout
-printf "\nTo stop or start service print \033[0;32msstart\033[0m or \033[0;32msstart\033[0m\nOr do it throught \033[0;32msystemctl\n\033[0m"
+printf "\nTo stop or start service print \033[0;32msstop\033[0m or \033[0;32msstart\033[0m\nOr do it throught \033[0;32msystemctl\n\033[0m"
 printf "System needs reboot, chose the option and press enter,\t y/N "
 read yn
 if [ $yn == 'y' ]
