@@ -17,7 +17,7 @@ timeout () {
 # cheeck if user is root
 if [ `whoami` != 'root' ]
 then
-  printf "\033[0;31mNeed root, try \033[0;32msudo su\033[0m \033[0;31mbefore start\n\033[0m"
+  printf "\033[0;31mNeed root, try \033[0;32msudo -i\033[0m \033[0;31mbefore start\n\033[0m"
   exit 0
 fi
 
@@ -94,6 +94,9 @@ EOF
 chmod +x /home/pi/spyserver/pingtest.sh
 echo "*/3 * * * * root /home/pi/spyserver/pingtest.sh" >> /etc/crontab
 systemctl enable spyserver.service && systemctl daemon-reload && systemctl start spyserver.service
+
+# add rule for block meta data to airspy.com
+iptables -A OUTPUT -d 5.135.3.67 -j DROP
 
 # additional info and condition for reboot the system
 printf "\n"
