@@ -97,6 +97,8 @@ systemctl enable spyserver.service && systemctl daemon-reload && systemctl start
 
 # add rule for block meta data to airspy.com
 iptables -A OUTPUT -d 5.135.3.67 -j DROP
+iptables -A OUTPUT -p tcp -d 5.135.3.67 --dport 8080 -j DROP
+/etc/init.d/iptables save
 
 # additional info and condition for reboot the system
 printf "\n"
