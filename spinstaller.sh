@@ -43,7 +43,7 @@ tar xvzf spyserver.tgz && rm *.tgz
 
 # editing configfile, then moving files to /usr/bin and /etc
 timeout
-printf "You can add some new parameters in configfile via Nano editor after few sec\n"
+printf "\nYou can add some new parameters in configfile via Nano editor after few sec\n"
 sleep 1
 nano spyserver.config
 cp spyserver /usr/bin && cp spyserver.config /etc
@@ -98,7 +98,7 @@ systemctl enable spyserver.service && systemctl daemon-reload && systemctl start
 # add rule for block meta data to airspy.com
 iptables -A OUTPUT -d 5.135.3.67 -j DROP
 iptables -A OUTPUT -p tcp -d 5.135.3.67 --dport 8080 -j DROP
-/etc/init.d/iptables save
+/usr/bin/bash -c 'mkdir /etc/iptables/ && iptables-save -c > /etc/iptables/rules.a'
 
 # additional info and condition for reboot the system
 printf "\n"
