@@ -22,6 +22,7 @@ then
 fi
 
 # upgrade and install all libraries
+pkill -15 dpkg
 apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
 
 # check if there is not first attempt to install
@@ -98,7 +99,9 @@ systemctl enable spyserver.service && systemctl daemon-reload && systemctl start
 # add rule for block meta data to airspy.com
 iptables -A OUTPUT -d 5.135.3.67 -j DROP
 iptables -A OUTPUT -p tcp -d 5.135.3.67 --dport 8080 -j DROP
-/usr/bin/bash -c 'mkdir /etc/iptables/ && iptables-save -c > /etc/iptables/rules.a'
+/usr/bin/bash -c 'mkdir /etc/iptables/ && iptables-save -c > /etc/iptables/rules.v4'
+apt install iptables-persistent -y
+systemctl enable netfilter-persistent.service
 
 # additional info and condition for reboot the system
 printf "\n"
