@@ -24,6 +24,16 @@ fi
 # upgrade and install all libraries and kill unattended upgrades in ubuntu 20.04
 killall -9 /usr/bin/python3
 apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
+# reboot your pi after first update
+printf "System needs reboot, if you update first time (y), if not use (n) \t y/N "
+read yesno
+if [ $yesno == 'y' ]
+then
+  printf "\033[0;31mreboot now\n\033[0m"
+  reboot now
+else
+  printf "Ok, lets go\n"
+fi
 
 # check if there is not first attempt to install
 if [ -d /home/pi/spyserver ]
