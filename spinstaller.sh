@@ -21,8 +21,8 @@ then
   exit 0
 fi
 
-# upgrade and install all libraries
-pkill -15 dpkg
+# upgrade and install all libraries and kill unattended upgrades in ubuntu 20.04
+killall -9 /usr/bin/python3
 apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
 
 # check if there is not first attempt to install
