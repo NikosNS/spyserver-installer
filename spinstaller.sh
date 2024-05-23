@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# simple function to wait few seconds
-timeout () {
-  for (( i=1; i<=6; i++ ))
-  do
-    printf "\033[0;31m.\n\033[0m"
-    for j in $(seq 1 $i)
-    do
-      printf "\033[0;31m.\033[0m"
-      sleep 1
-    done
-  done
-}
-
-
 # cheeck if user is root
 if [ `whoami` != 'root' ]
 then
@@ -22,7 +8,7 @@ then
 fi
 
 # upgrade and install all libraries and kill unattended upgrades in ubuntu 20.04
-killall -9 apt.system.dai unattended-upgr
+killall -9 apt.system.dai unattended-upgr apt
 apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
 # reboot your pi after first update
 printf "System needs reboot, if you update first time (y), if not use (n) \t y/N "
@@ -53,9 +39,8 @@ fi
 tar xvzf spyserver.tgz && rm *.tgz
 
 # editing configfile, then moving files to /usr/bin and /etc
-timeout
 printf "\nYou can add some new parameters in configfile via Nano editor after few sec\n"
-sleep 1
+sleep 2
 nano spyserver.config
 cp spyserver /usr/bin && cp spyserver.config /etc
 chown -R pi:pi /home/pi/spyserver
@@ -115,7 +100,7 @@ systemctl enable netfilter-persistent.service
 
 # additional info and condition for reboot the system
 printf "\n"
-timeout
+sleep 2
 printf "\nTo stop or start service print \033[0;32msstop\033[0m or \033[0;32msstart\033[0m\nOr do it throught \033[0;32msystemctl\n\033[0m"
 printf "System needs reboot, chose the option and press enter,\t y/N "
 read yn
