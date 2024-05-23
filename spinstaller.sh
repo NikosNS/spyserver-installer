@@ -22,7 +22,7 @@ then
 fi
 
 # upgrade and install all libraries and kill unattended upgrades in ubuntu 20.04
-killall -9 /bin/sh /usr/lib/apt/apt.system.daily install
+killall -9 apt.system.dai unattended-upgr
 apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
 # reboot your pi after first update
 printf "System needs reboot, if you update first time (y), if not use (n) \t y/N "
