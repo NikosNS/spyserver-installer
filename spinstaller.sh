@@ -9,7 +9,7 @@ fi
 
 # upgrade and install all libraries and kill unattended upgrades in ubuntu 20.04
 killall -9 apt.system.dai unattended-upgr apt
-apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 wget htop tmux git iftop
+apt update && apt upgrade -y && apt install -y rtl-sdr librtlsdr-dev librtlsdr0 airspy libairspy-dev libairspy0 wget htop tmux git iftop
 # reboot your pi after first update
 printf "System needs reboot, if you update first time (y), if not use (n) \t y/N "
 read yesno
